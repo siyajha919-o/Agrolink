@@ -1,42 +1,81 @@
-# Welcome to your Lovable project
+# 🌾 AgroLink Frontend# Welcome to your Lovable project
 
-## Project info
 
-**URL**: https://lovable.dev/projects/ec10f5d9-610f-46d7-8976-f7ef4412d266
 
-## How can I edit this code?
+> Modern React + TypeScript frontend for the AgroLink farmer-to-buyer marketplace platform## Project info
 
-There are several ways of editing your application.
 
-**Use Lovable**
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ec10f5d9-610f-46d7-8976-f7ef4412d266) and start prompting.
+[![React](https://img.shields.io/badge/React-18-blue)](https://reactjs.org/)**URL**: https://lovable.dev/projects/ec10f5d9-610f-46d7-8976-f7ef4412d266
 
-Changes made via Lovable will be committed automatically to this repo.
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
+
+[![Vite](https://img.shields.io/badge/Vite-5-purple)](https://vitejs.dev/)## How can I edit this code?
+
+
+
+##✨ FeaturesThere are several ways of editing your application.
+
+
+
+- 🎨 Modern UI with Shadcn components**Use Lovable**
+
+- 🔐 JWT Authentication
+
+- 🛒 Product MarketplaceSimply visit the [Lovable Project](https://lovable.dev/projects/ec10f5d9-610f-46d7-8976-f7ef4412d266) and start prompting.
+
+- 👨‍🌾 Farmer Dashboard
+
+- 💳 Razorpay PaymentsChanges made via Lovable will be committed automatically to this repo.
+
+- 📱 Fully Responsive
 
 **Use your preferred IDE**
 
+## 🚀 Quick Start
+
 If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
 
-Follow these steps:
+npm installThe only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+npm run dev
 
-# Step 2: Navigate to the project directory.
+```Follow these steps:
+
+
+
+Create `.env`:```sh
+
+```env# Step 1: Clone the repository using the project's Git URL.
+
+VITE_API_BASE_URL=http://127.0.0.1:5000/apigit clone <YOUR_GIT_URL>
+
+VITE_RAZORPAY_KEY_ID=your_key_here
+
+```# Step 2: Navigate to the project directory.
+
 cd <YOUR_PROJECT_NAME>
 
+## 📚 Documentation
+
 # Step 3: Install the necessary dependencies.
-npm i
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+See [Full Documentation](./docs/README_FULL.md) for complete setup guide, API integration, and deployment instructions.npm i
+
+
+
+**Backend:** [agrolink-backend/README.md](../agrolink-backend/README.md)# Step 4: Start the development server with auto-reloading and an instant preview.
+
 npm run dev
-```
 
-**Edit a file directly in GitHub**
+---```
+
+
+
+**Made with ❤️ for farmers and buyers****Edit a file directly in GitHub**
+
 
 - Navigate to the desired file(s).
 - Click the "Edit" button (pencil icon) at the top right of the file view.

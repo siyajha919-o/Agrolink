@@ -1,16 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { ProductCard } from "@/components/ProductCard";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search } from "lucide-react";
+import { productsAPI } from "@/lib/api";
 
 const Marketplace = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("all");
+  const [products, setProducts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch products from backend
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await productsAPI.getAll();
+        setProducts(data);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
 
   // Mock data - in real app this would come from backend
-  const products = [
+  const mockProducts = [
     {
       id: 1,
       name: "Organic Tomatoes",
@@ -79,9 +97,12 @@ const Marketplace = () => {
     },
   ];
 
-  const filteredProducts = products.filter((product) => {
+  // Use real products if available, fallback to mock data
+  const displayProducts = products.length > 0 ? products : mockProducts;
+
+  const filteredProducts = displayProducts.filter((product) => {
     const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         product.farmer.toLowerCase().includes(searchQuery.toLowerCase());
+                         (product.farmer?.toLowerCase() || product.farmerId?.name?.toLowerCase() || '').includes(searchQuery.toLowerCase());
     const matchesCategory = category === "all" || product.category === category;
     return matchesSearch && matchesCategory;
   });
@@ -124,20 +145,28 @@ const Marketplace = () => {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => (
-            <ProductCard
-              key={product.id}
-              name={product.name}
-              farmer={product.farmer}
-              location={product.location}
-              price={product.price}
-              unit={product.unit}
-              image={product.image}
-              organic={product.organic}
-            />
-          ))}
-        </div>
+        {loading ? (
+          <div className="text-center py-12">
+            <p className="text-xl text-muted-foreground">Loading products...</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProducts.map((product) => (
+              <ProductCard
+                key={product._id || product.id}
+                productId={product._id}
+                farmerId={product.farmerId?._id || product.farmerId}
+                name={product.name}
+                farmer={product.farmerId?.name || product.farmer || 'Unknown Farmer'}
+                location={product.location}
+                price={product.pricePerKg?.toString() || product.price}
+                unit={product.unit || 'kg'}
+                image={product.imageUrl || product.image || 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400'}
+                organic={product.organic}
+              />
+            ))}
+          </div>
+        )}
 
         {filteredProducts.length === 0 && (
           <div className="text-center py-12">

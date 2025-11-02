@@ -18,7 +18,7 @@ const Marketplace = () => {
       location: "Punjab",
       price: "40",
       unit: "kg",
-      image: "https://images.unsplash.com/photo-1546470427-e26264be0b0c?w=400",
+      image: new URL("@/assets/tomatoes.jpg", import.meta.url).href,
       organic: true,
       category: "vegetables",
     },

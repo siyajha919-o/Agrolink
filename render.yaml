@@ -1,0 +1,30 @@
+# Render.com service definition for automatic deploys from the repo's 'main' branch.
+# Replace placeholder values or set secrets in the Render dashboard after connecting the repo.
+services:
+  - type: web
+    name: agrolink-backend
+    env: node
+    plan: free
+    branch: main
+    pullRequestPreviews: false
+    buildCommand: "npm install"
+    startCommand: "npm start"
+    envVars:
+      - key: PORT
+        value: "5000"
+      - key: MONGO_URI
+        value: "<replace-with-your-mongodb-uri-or-set-as-secret>"
+      - key: JWT_SECRET
+        value: "<replace-with-jwt-secret>"
+      - key: CLOUDINARY_CLOUD_NAME
+        value: "<optional-cloudinary-cloud-name>"
+      - key: CLOUDINARY_API_KEY
+        value: "<optional-cloudinary-key>"
+      - key: CLOUDINARY_API_SECRET
+        value: "<optional-cloudinary-secret>"
+      - key: RAZORPAY_KEY_ID
+        value: "<optional-razorpay-key-id>"
+      - key: RAZORPAY_KEY_SECRET
+        value: "<optional-razorpay-secret>"
+      - key: FIREBASE_SERVICE_ACCOUNT_JSON
+        value: "<optional-firebase-service-account-json>"

@@ -7,7 +7,17 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(cors());
+
+// CORS configuration for production
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? ['https://agrolink-xyz123.vercel.app', 'https://*.vercel.app'] // Update with your Vercel URL
+    : ['http://localhost:8080', 'http://127.0.0.1:8080'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
